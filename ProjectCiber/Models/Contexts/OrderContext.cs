@@ -17,5 +17,10 @@ namespace ProjectCiber.Models.Contexts
         {
 
         }
+
+        internal Task<Order> FindAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

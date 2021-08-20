@@ -16,6 +16,10 @@ namespace ProjectCiber.Responsitorys
 
         public Task<int> SaveOrderAsync(Order order, int id);
 
+        public Task<Order> GetOrderByIdAsync(int id);
+
+        public Task<int> DeleteOrderAsync(Order order);
+
 
     }
 }

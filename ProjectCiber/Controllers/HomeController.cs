@@ -49,22 +49,44 @@ namespace ProjectCiber.Controllers
             {
                 return View(new Order());
             }
-            return View(new Order());
+            else
+            {
+                var order = await _orderService.GetOrderByIdAsync(id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
+                return View(order);
+            }
         }
         [HttpPost]
-        public IActionResult AddOrEdit(int id, Order order)
+        public async Task<IActionResult> AddOrEdit(int id, Order order)
         {
             if (ModelState.IsValid)
             {
-                _orderService.SaveOrderAsync(order, id);
-                //return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", _orderService.GetOrderAsync(null)) });
+                await _orderService.SaveOrderAsync(order, id);
+                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
             }
-
-            //return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", _orderService.GetOrderAsync(null)) });
-            return Json(new { isValid = false, html = Helper.Helpers.RenderViewToString(this, "AddOrEdit", order) });
+            else
+            {
+                //return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", _orderService.GetOrderAsync(null)) });
+                return Json(new { isValid = false, html = Helper.Helpers.RenderViewToString(this, "AddOrEdit", order) });
+            }
         }
 
-        
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            var order = await _orderService.GetOrderByIdAsync(id);
+            if (ModelState.IsValid)
+            {
+                await _orderService.DeleteOrderAsync(order);
+                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
+            }
+            return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
+        }
+
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

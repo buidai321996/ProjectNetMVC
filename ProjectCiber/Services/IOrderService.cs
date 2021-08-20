@@ -15,5 +15,8 @@ namespace ProjectCiber.Services
         public Task<List<Product>> GetProductAsync();
 
         public Task<int> SaveOrderAsync(Order order, int id);
+
+        public Task<Order> GetOrderByIdAsync(int id);
+        public Task<int> DeleteOrderAsync(Order order);
     }
 }

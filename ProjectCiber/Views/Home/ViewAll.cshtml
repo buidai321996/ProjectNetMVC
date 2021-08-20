@@ -51,10 +51,14 @@
                     @item.Amount
                 <td>
                     <div>
-                        <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",new {id=item.Id},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a onclick="showInPopup1('@Url.Action("AddOrEdit","Home",new {id=item.Id},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <form asp-action="Delete" asp-controller="Home" method="post" onsubmit="return DeleteOrder(this);" class="d-inline">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="submit" value="Delete" class="btn-sm btn btn-danger" />
+                        </form>
                     </div>
                 </td>
-                </td>
+
             </tr>
             }
 

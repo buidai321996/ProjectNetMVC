@@ -65,7 +65,7 @@ namespace ProjectCiber.Responsitorys
                     });
             if (contrain != null)
             {
-                return resultDinamic.Where(order => order.CustomerName.Equals(contrain)).ToListAsync();
+                return resultDinamic.Where(order => order.CustomerName.Equals(contrain.Trim())).ToListAsync();
             }
             else
             {
@@ -91,6 +91,17 @@ namespace ProjectCiber.Responsitorys
                 return await _orderContext.SaveChangesAsync();
             }
         }
-        
+
+        public async Task<Order> GetOrderByIdAsync(int id)
+        {
+            return await _orderContext.Orders.FindAsync(id);
+        }
+
+        public async Task<int> DeleteOrderAsync(Order order)
+        {
+             _orderContext.Orders.Remove(order);
+            return await _orderContext.SaveChangesAsync();
+        }
+
     }
 }

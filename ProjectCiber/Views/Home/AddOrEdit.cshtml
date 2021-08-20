@@ -4,7 +4,7 @@
 }
 <div class="row">
     <div class="coll-sm-12">
-        <form class="form-group row"  asp-action="AddOrEdit" asp-controller="Home">
+        <form class="form-group row"  asp-action="AddOrEdit" asp-controller="Home" method="post" onsubmit="return SaveOrderPost(this);">
             <div asp-validation-summary="ModelOnly"  class="text-danger"></div>
             <input type="hidden" />
             <div class="row">

@@ -36,5 +36,14 @@ namespace ProjectCiber.Services
         {
             return _orderResponsitory.SaveOrderAsync(order,  id);
         }
+        public Task<Order> GetOrderByIdAsync(int id)
+        {
+            return _orderResponsitory.GetOrderByIdAsync(id);
+        }
+        public async Task<int> DeleteOrderAsync(Order order)
+        {
+            return await _orderResponsitory.DeleteOrderAsync(order);
+        }
     }
+    
 }
