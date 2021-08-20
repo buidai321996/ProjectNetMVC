@@ -19,6 +19,16 @@ namespace ProjectCiber.Responsitorys
             this._orderContext = orderContext;
         }
 
+        public Task<int> AddOrder(OrderViewModel orderViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Customer>> GetCustomerAsync()
+        {
+            return await _orderContext.Contacts.ToListAsync();
+        }
+
         public Task<List<OrderViewModel>> GetOrderAsync(string contrain)
         {
             var resultDinamic = _orderContext.Orders
@@ -62,5 +72,25 @@ namespace ProjectCiber.Responsitorys
                 return resultDinamic.ToListAsync();
             }
         }
+
+        public async Task<List<Product>> GetProductAsync()
+        {
+            return await _orderContext.Products.ToListAsync();
+        }
+
+        public async Task<int> SaveOrderAsync(Order order, int id)
+        {
+            if (id == 0)
+            {
+                _orderContext.Add(order);
+                return await _orderContext.SaveChangesAsync();
+            }
+            else
+            {
+                _orderContext.Update(order);
+                return await _orderContext.SaveChangesAsync();
+            }
+        }
+        
     }
 }

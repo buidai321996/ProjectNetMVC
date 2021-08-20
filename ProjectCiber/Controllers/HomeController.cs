@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using static ProjectCiber.Helper.Helpers;
 
 namespace ProjectCiber.Controllers
 {
@@ -37,12 +38,34 @@ namespace ProjectCiber.Controllers
            
             return View(listOrder);
         }
-        public IActionResult CreateOrderModal()
+        [HttpGet]
+        public async Task<IActionResult> AddOrEdit(int id = 0)
         {
-            return View();
+            var product = await _orderService.GetProductAsync();
+            ViewData["listDataProducts"] = product;
+            var customers = await _orderService.GetCustomerAsync();
+            ViewData["listDataCustomers"] = customers;
+            if (id == 0)
+            {
+                return View(new Order());
+            }
+            return View(new Order());
+        }
+        [HttpPost]
+        public IActionResult AddOrEdit(int id, Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _orderService.SaveOrderAsync(order, id);
+                //return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", _orderService.GetOrderAsync(null)) });
+            }
+
+            //return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", _orderService.GetOrderAsync(null)) });
+            return Json(new { isValid = false, html = Helper.Helpers.RenderViewToString(this, "AddOrEdit", order) });
         }
 
-       
+        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

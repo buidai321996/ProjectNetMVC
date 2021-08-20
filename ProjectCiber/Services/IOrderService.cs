@@ -11,5 +11,9 @@ namespace ProjectCiber.Services
     public interface IOrderService
     {
         public Task<List<OrderViewModel>> GetOrderAsync(string contrain);
+        public Task<List<Customer>> GetCustomerAsync();
+        public Task<List<Product>> GetProductAsync();
+
+        public Task<int> SaveOrderAsync(Order order, int id);
     }
 }

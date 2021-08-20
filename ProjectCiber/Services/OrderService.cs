@@ -17,9 +17,24 @@ namespace ProjectCiber.Services
             this._orderResponsitory = orderResponsitory;
         }
 
+        public Task<List<Customer>> GetCustomerAsync()
+        {
+            return _orderResponsitory.GetCustomerAsync();
+        }
+
         public Task<List<OrderViewModel>> GetOrderAsync(string contrain)
         {
             return _orderResponsitory.GetOrderAsync(contrain);
+        }
+
+        public Task<List<Product>> GetProductAsync()
+        {
+            return _orderResponsitory.GetProductAsync();
+        }
+
+        public Task<int> SaveOrderAsync(Order order, int id)
+        {
+            return _orderResponsitory.SaveOrderAsync(order,  id);
         }
     }
 }
