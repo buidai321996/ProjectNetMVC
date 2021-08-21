@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\buico\\source\\repos\\ProjectCiber\\ProjectCiber\\ProjectCiber.csproj": {}
+    "C:\\Users\\buico\\OneDrive\\Desktop\\CodeMvcNet\\ProjectNetMVC\\ProjectCiber\\ProjectCiber.csproj": {}
   },
   "projects": {
-    "C:\\Users\\buico\\source\\repos\\ProjectCiber\\ProjectCiber\\ProjectCiber.csproj": {
+    "C:\\Users\\buico\\OneDrive\\Desktop\\CodeMvcNet\\ProjectNetMVC\\ProjectCiber\\ProjectCiber.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\buico\\source\\repos\\ProjectCiber\\ProjectCiber\\ProjectCiber.csproj",
+        "projectUniqueName": "C:\\Users\\buico\\OneDrive\\Desktop\\CodeMvcNet\\ProjectNetMVC\\ProjectCiber\\ProjectCiber.csproj",
         "projectName": "ProjectCiber",
-        "projectPath": "C:\\Users\\buico\\source\\repos\\ProjectCiber\\ProjectCiber\\ProjectCiber.csproj",
+        "projectPath": "C:\\Users\\buico\\OneDrive\\Desktop\\CodeMvcNet\\ProjectNetMVC\\ProjectCiber\\ProjectCiber.csproj",
         "packagesPath": "C:\\Users\\buico\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\buico\\source\\repos\\ProjectCiber\\ProjectCiber\\obj\\",
+        "outputPath": "C:\\Users\\buico\\OneDrive\\Desktop\\CodeMvcNet\\ProjectNetMVC\\ProjectCiber\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\buico\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[5.0.9, )"
@@ -71,6 +75,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "PagedList": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "PagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             }
           },
           "imports": [

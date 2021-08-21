@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using PagedList;
+using PagedList.Mvc;
 
 namespace ProjectCiber.Responsitorys
 {
@@ -29,14 +31,14 @@ namespace ProjectCiber.Responsitorys
             return await _orderContext.Contacts.ToListAsync();
         }
 
-        public Task<List<OrderViewModel>> GetOrderAsync(string contrain)
+        public async Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int ? page, int ? pageSize)
         {
             var resultDinamic = _orderContext.Orders
                 .Join(
                 _orderContext.Products,
                 order => order.ProductId,
                 product => product.Id,
-                 (order, product) => new { Order = order, Product = product }
+                 (order, product) => new { Order = order, Product = product}
                 ).Join(
                  _orderContext.Contacts,
                  cs => cs.Order.CustomerId,
@@ -65,11 +67,17 @@ namespace ProjectCiber.Responsitorys
                     });
             if (contrain != null)
             {
-                return resultDinamic.Where(order => order.CustomerName.Equals(contrain.Trim())).ToListAsync();
+                var dataAll = resultDinamic.ToList().Count;
+                var data = resultDinamic.Where(order => order.CustomerName.Equals(contrain.Trim())).ToPagedList(page ?? 1, (int)pageSize);
+                data.ToList()[0].CountList = dataAll;
+                return data;
             }
             else
             {
-                return resultDinamic.ToListAsync();
+                var dataAll = resultDinamic.ToList().Count;
+                var data = resultDinamic.ToPagedList(page ?? 1, (int)pageSize);
+                data.ToList()[0].CountList = dataAll;
+                return  data;
             }
         }
 

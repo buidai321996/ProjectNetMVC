@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "ProjectCiber/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.9",
           "Microsoft.AspNetCore.Mvc.TagHelpers": "2.2.0",
           "Microsoft.EntityFrameworkCore": "5.0.9",
@@ -40,6 +41,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+          "PagedList": "1.17.0",
+          "PagedList.Mvc": "4.5.0",
           "Microsoft.AspNetCore.Antiforgery.Reference": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -455,7 +458,7 @@
           "Microsoft.Net.Http.Headers": "2.2.0"
         }
       },
-      "Microsoft.AspNetCore.Mvc.Core/2.2.0": {
+      "Microsoft.AspNetCore.Mvc.Core/2.2.5": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
           "Microsoft.AspNetCore.Authorization.Policy": "2.2.0",
@@ -476,7 +479,7 @@
       },
       "Microsoft.AspNetCore.Mvc.DataAnnotations/2.2.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.Extensions.Localization": "2.2.0",
           "System.ComponentModel.Annotations": "5.0.0"
         }
@@ -484,7 +487,7 @@
       "Microsoft.AspNetCore.Mvc.Formatters.Json/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.JsonPatch": "2.2.0",
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.0"
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
         }
       },
       "Microsoft.AspNetCore.Mvc.Razor/2.2.0": {
@@ -544,7 +547,7 @@
           "Microsoft.AspNetCore.Antiforgery": "2.2.0",
           "Microsoft.AspNetCore.Diagnostics.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Html.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.Mvc.DataAnnotations": "2.2.0",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "2.2.0",
           "Microsoft.Extensions.WebEncoders": "2.2.0",
@@ -1441,6 +1444,31 @@
         },
         "compile": {
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
+        }
+      },
+      "PagedList/1.17.0": {
+        "runtime": {
+          "lib/net40/PagedList.dll": {
+            "assemblyVersion": "1.17.0.0",
+            "fileVersion": "1.17.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/PagedList.dll": {}
+        }
+      },
+      "PagedList.Mvc/4.5.0": {
+        "dependencies": {
+          "PagedList": "1.17.0"
+        },
+        "runtime": {
+          "lib/net40/PagedList.Mvc.dll": {
+            "assemblyVersion": "4.5.0.0",
+            "fileVersion": "4.5.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/PagedList.Mvc.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -4259,12 +4287,12 @@
       "path": "microsoft.aspnetcore.mvc.abstractions/2.2.0",
       "hashPath": "microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Mvc.Core/2.2.0": {
+    "Microsoft.AspNetCore.Mvc.Core/2.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ALiY4a6BYsghw8PT5+VU593Kqp911U3w9f/dH9/ZoI3ezDsDAGiObqPu/HP1oXK80Ceu0XdQ3F0bx5AXBeuN/Q==",
-      "path": "microsoft.aspnetcore.mvc.core/2.2.0",
-      "hashPath": "microsoft.aspnetcore.mvc.core.2.2.0.nupkg.sha512"
+      "sha512": "sha512-/8sr8ixIUD57UFwUntha9bOwex7/AkZfdk1f9oNJG1Ek7p/uuKVa7fuHmYZpQOf35Oxrt+2Ku4WPwMSbNxOuWg==",
+      "path": "microsoft.aspnetcore.mvc.core/2.2.5",
+      "hashPath": "microsoft.aspnetcore.mvc.core.2.2.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Mvc.DataAnnotations/2.2.0": {
       "type": "package",
@@ -4769,6 +4797,20 @@
       "sha512": "sha512-5PYT/IqQ+UK31AmZiSS102R6EsTo+LGTSI8bp7WAUqDKaF4wHXD8U9u4WxTI1vc64tYi++8p3dk3WWNqPFgldw==",
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
+    },
+    "PagedList/1.17.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ou6F3WKXh49hOo0TxWM+SkIGuKllYPuPPvnSYOlQ1sTrtuEyuDUhYbSJd5Sdb06i/sWUJZTjiUecEs3Ht/Hx3g==",
+      "path": "pagedlist/1.17.0",
+      "hashPath": "pagedlist.1.17.0.nupkg.sha512"
+    },
+    "PagedList.Mvc/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D0M4qW2g4a9cwG8ozIKUnJheCrm5GpFTceqUl63AXWaAVnTgk+TysZYUOGMsBRuzid8aF+/E8b0bXM6+90jiEw==",
+      "path": "pagedlist.mvc/4.5.0",
+      "hashPath": "pagedlist.mvc.4.5.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

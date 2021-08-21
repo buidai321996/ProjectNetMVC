@@ -28,6 +28,10 @@ namespace ProjectCiber.Models.ViewModels
 
         public int Amount { get; set; }
 
+        public int Page { get; set; }
+
+        public int CountList { get; set; }
+
         public OrderViewModel()
         {
             this.OrderDate = DateTime.Now;

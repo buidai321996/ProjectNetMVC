@@ -10,7 +10,7 @@ namespace ProjectCiber.Services
 {
     public interface IOrderService
     {
-        public Task<List<OrderViewModel>> GetOrderAsync(string contrain);
+        public Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int? page, int? pageSize);
         public Task<List<Customer>> GetCustomerAsync();
         public Task<List<Product>> GetProductAsync();
 

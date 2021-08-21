@@ -85,6 +85,12 @@ DeleteOrder = form => {
     //prevent default form submit event
     return false;
 }
+function OnSelectedIndexChanged(value) {
+    var textValue = value.options[value.selectedIndex].text;
+    $("#pageSize").val(textValue);
+    value.selectedIndex;
+    $("#formChangePageSize").submit();
+}
 
 
 

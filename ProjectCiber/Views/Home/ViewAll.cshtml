@@ -1,30 +1,50 @@
 ﻿
-
-@model List<ProjectCiber.Models.ViewModels.OrderViewModel>
+@model IEnumerable<ProjectCiber.Models.ViewModels.OrderViewModel>
 @{
     ViewData["Title"] = "Home Page";
-
+    var CountList = Model.ToList()[0].CountList;
+    var pageSize = ViewData["pageSize"];
+    var CountPage = 0;
+    if (CountList % 5 == 0)
+    {
+        CountPage = CountList / (int)pageSize;
+    }
+    else
+    {
+        CountPage = CountList / (int)pageSize + 1;
+    }
 
 }
 
 <div class="col-8 col-sm-8 mt-2">
-    <form class="form-group row has-feedback has-feedback-left"  asp-action="Index" asp-controller="Home">
+    <form class="form-group row has-feedback has-feedback-left" asp-action="Index" asp-controller="Home" method="get">
         <label class="col-sm-4 col-form-label lable_class">Enter catagory to Search</label>
         <div class="col-sm-6">
             <input class="form-control" type="text" id="search" name="search" value="@ViewData["GetOrderdetail"]">
+            <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
         </div>
         <button class="btn-primary btn-sm col-sm-2" type="submit">Search</button>
     </form>
 
 </div>
+  <button class="btn-primary col-sm-1 btn" data-target="#form-modal" data-toggle="modal" data-backdrop="static" type="submit" onclick="showInPopup1('@Url.Action("AddOrEdit","Home",null,Context.Request.Scheme)','New Order')">Add Order</button>
 
-<button class="btn-primary btn-sm" data-target="#form-modal" data-toggle="modal" data-backdrop="static" type="submit" onclick="showInPopup1('@Url.Action("AddOrEdit","Home",null,Context.Request.Scheme)','New Order')">Add Order</button>
+    <form asp-action="Index" , asp-controller="Home" method="get" id="formChangePageSize" class="col-sm-1 mt-2">
+        <select class="form-control float-right" id="pageSizeSelect" asp-for="@ViewData["pageSize"]" onchange="OnSelectedIndexChanged(this)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50</option>
+        </select>
+        <input name="pageSize" id="pageSize" type="hidden" value="@ViewData["pageSize"]" />
+    </form>
+
+
 
 
 <div class="table-responsive-sm table1" style="overflow: auto; display: block; white-space: nowrap;">
-    <table class="table">
+    <table class="table" id="tableOrder">
         <thead>
-        <th>Product Name</th>
+        <th data-sortable="true">Product Name</th>
         <th>Catagory Name</th>
         <th>Customer Name</th>
         <th>Order Date</th>
@@ -34,35 +54,63 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @item.ProductName
-                </td>
-                <td>
-                    @item.CustomerName
-                </td>
-                <td>
-                    @item.CatagoryName
-                </td>
-                <td>
-                    @item.OrderDate
-                </td>
-                <td>
-                    @item.Amount
-                <td>
-                    <div>
-                        <a onclick="showInPopup1('@Url.Action("AddOrEdit","Home",new {id=item.Id},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
-                        <form asp-action="Delete" asp-controller="Home" method="post" onsubmit="return DeleteOrder(this);" class="d-inline">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <input type="submit" value="Delete" class="btn-sm btn btn-danger" />
-                        </form>
-                    </div>
-                </td>
+                <tr>
+                    <td>
+                        @item.ProductName
+                        
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td>
+                        @item.CatagoryName
+                    </td>
+                    <td>
+                        @item.OrderDate
+                    </td>
+                    <td>
+                        @item.Amount
+                    <td>
+                        <div>
+                            <a onclick="showInPopup1('@Url.Action("AddOrEdit","Home",new {id=item.Id},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                            <form asp-action="Delete" asp-controller="Home" method="post" onsubmit="return DeleteOrder(this);" class="d-inline">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <input type="submit" value="Delete" class="btn-sm btn btn-danger" />
+                            </form>
+                        </div>
+                    </td>
 
-            </tr>
+                </tr>
             }
 
         </tbody>
 
     </table>
+    <div class="pagination">
+        <button type="submit" class="btn-sm" >&laquo;</button>
+
+
+        @for (var i = 1; i <= CountPage; i++)
+        {
+            if (Model.ToList()[0].Page.Equals(i))
+            {
+                <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
+                    <input type="hidden" name="page" value="@i" />
+                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+                    <button type="submit" class="btn-sm active ">@i</button>
+                </form>
+            }
+            else
+            {
+                <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
+                    <input type="hidden" name="page" value="@i" />
+                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+                    <button type="submit" class="btn-sm ">@i</button>
+                </form>
+            }
+
+
+        }
+        <button type="submit" class="btn-sm">&raquo;</button>
+    </div>
 </div>

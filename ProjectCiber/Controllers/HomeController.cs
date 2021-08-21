@@ -23,20 +23,11 @@ namespace ProjectCiber.Controllers
             _logger = logger;
             this._orderService = orderService;
         }
-        public async Task<IActionResult> IndexAsync(string search)
+        [HttpGet, ActionName("Index")]
+        public async Task<IActionResult> IndexAsync(string search, int ? page = 1, int  pageSize = 5)
         {
-            List<OrderViewModel> listOrder;
-            ViewData["GetOrderdetail"] = search;
-            if (!String.IsNullOrEmpty(search))
-            {
-                listOrder = await _orderService.GetOrderAsync(search);
-            }
-            else
-            {
-                listOrder = await _orderService.GetOrderAsync(null);
-            }
-           
-            return View(listOrder);
+
+            return View(await GetListOrder(search, page, pageSize));
         }
         [HttpGet]
         public async Task<IActionResult> AddOrEdit(int id = 0)
@@ -65,7 +56,7 @@ namespace ProjectCiber.Controllers
             if (ModelState.IsValid)
             {
                 await _orderService.SaveOrderAsync(order, id);
-                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
+                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await GetListOrder(null, 1,5))});
             }
             else
             {
@@ -81,13 +72,30 @@ namespace ProjectCiber.Controllers
             if (ModelState.IsValid)
             {
                 await _orderService.DeleteOrderAsync(order);
-                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
+                return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await GetListOrder(null, 1,5)) });
             }
-            return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await _orderService.GetOrderAsync(null)) });
+            return Json(new { isValid = true, html = Helper.Helpers.RenderViewToString(this, "ViewAll", await GetListOrder(null, 1,5)) });
         }
 
 
-
+        public async Task<IEnumerable<OrderViewModel>> GetListOrder(string search, int ? page, int ? pageSize)
+        {
+            IEnumerable<OrderViewModel> listOrder;
+            ViewData["GetOrderdetail"] = search;
+            if (!String.IsNullOrEmpty(search))
+            {
+                listOrder = await _orderService.GetOrderAsync(search, page, pageSize);
+                listOrder.ToList()[0].Page = (int)page;
+            }
+            else
+            {
+                listOrder = await _orderService.GetOrderAsync(null, page, pageSize);
+                listOrder.ToList()[0].Page = (int)page;
+            }
+            ViewData["CountList"] = listOrder.ToList()[0].CountList;
+            ViewData["PageSize"] = pageSize;
+            return listOrder;
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
