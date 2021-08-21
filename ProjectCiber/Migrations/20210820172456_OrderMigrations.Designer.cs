@@ -10,8 +10,8 @@ using ProjectCiber.Models.Contexts;
 namespace ProjectCiber.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20210819132448_OrderMigrtions")]
-    partial class OrderMigrtions
+    [Migration("20210820172456_OrderMigrations")]
+    partial class OrderMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,10 @@ namespace ProjectCiber.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");

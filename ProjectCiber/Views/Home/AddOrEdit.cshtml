@@ -1,0 +1,93 @@
+﻿@model ProjectCiber.Models.Order
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="coll-sm-12">
+        <form class="form-group row"  asp-action="AddOrEdit" asp-controller="Home" method="post" onsubmit="return SaveOrderPost(this);">
+            <div asp-validation-summary="ModelOnly"  class="text-danger"></div>
+            <input type="hidden" />
+            <div class="row">
+                <label class="col-sm-3 col-form-label lable_class">OrderName</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" id="OrderName" asp-for="OrderName" >
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <label class="col-sm-3 col-form-label lable_class">Product</label>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="ProductId"  asp-items="@(new SelectList(@ViewData["listDataProducts"] as List<Product>,"Id","Name"))">
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <label class="col-sm-3 col-form-label lable_class">Customer</label>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="CustomerId"  asp-items="@(new SelectList(@ViewData["listDataCustomers"] as List<Customer>,"Id","Name"))">
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <label class="col-sm-3 col-form-label lable_class">Order Date</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="date" asp-for="OrderDate" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <label class="col-sm-3 col-form-label lable_class">Amount</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="number" asp-for="Amount" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+
+            @*<div class="col-sm-12">
+            <div class="form-group">
+                <label class="custom-control-label">Product</label>
+                <select class="form-control-sm" asp-for="ProductId">
+                    <option value="1">Bear</option>
+                    <option value="2">Candy</option>
+                </select>
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="custom-control-label">Customer</label>
+                <select class="form-control-sm" asp-for="CustomerId">
+                    <option value="1">bcdai</option>
+                    <option value="2">hung</option>
+                </select>
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="custom-control-label">Order Date</label>
+                <input class="form-control-sm" type="date" asp-for="OrderDate" />
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="custom-control-label">Amount</label>
+                <input class="form-control-sm" type="number" />
+                <span class="text-danger"></span>
+            </div>
+        </div>*@
+            <hr />
+            <div class="col-sm-12 float-end">
+                <button type="submit" id="btnSave" name="btnSave" class="btn btn-sm btn-success">
+                    Save Order
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
