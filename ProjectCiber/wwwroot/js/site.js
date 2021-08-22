@@ -91,6 +91,18 @@ function OnSelectedIndexChanged(value) {
     value.selectedIndex;
     $("#formChangePageSize").submit();
 }
+$('a#listSortDesc').click(function (event) {
+    $("#stringSortDesc").val("DESC");
+    $("#formSortNameDesc").submit();          
+    return false; 
+});
+$('a#listSortAsc').click(function (event) {
+    $("#stringSortAsc").val("ASC");
+    $("#formSortNameAsc").submit();
+    return false;
+});
+
+
 
 
 

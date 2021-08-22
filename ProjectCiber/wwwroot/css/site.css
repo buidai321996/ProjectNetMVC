@@ -94,3 +94,11 @@ body {
 .pagination button:hover:not(.active) {
     background-color: #ddd;
     }
+
+.sortList .fa-sort-up:hover {
+    color: #1b7ac2 
+}
+
+.sortList .fa-sort-down:hover {
+    color: #1b7ac2
+}

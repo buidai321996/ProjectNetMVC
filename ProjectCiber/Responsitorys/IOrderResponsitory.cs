@@ -10,7 +10,7 @@ namespace ProjectCiber.Responsitorys
 {
     public interface IOrderResponsitory
     {
-        public  Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int? page , int? pageSize);
+        public  Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int? page , int? pageSize, string stringSort);
         public Task<List<Customer>> GetCustomerAsync();
         public Task<List<Product>> GetProductAsync();
 

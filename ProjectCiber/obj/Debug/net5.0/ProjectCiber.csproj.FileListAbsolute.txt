@@ -870,3 +870,4 @@ C:\Users\buico\OneDrive\Desktop\CodeMvcNet\ProjectNetMVC\ProjectCiber\obj\Debug\
 C:\Users\buico\OneDrive\Desktop\CodeMvcNet\ProjectNetMVC\ProjectCiber\obj\Debug\net5.0\ref\ProjectCiber.dll
 C:\Users\buico\OneDrive\Desktop\CodeMvcNet\ProjectNetMVC\ProjectCiber\obj\Debug\net5.0\ProjectCiber.pdb
 C:\Users\buico\OneDrive\Desktop\CodeMvcNet\ProjectNetMVC\ProjectCiber\obj\Debug\net5.0\ProjectCiber.genruntimeconfig.cache
+C:\Users\buico\OneDrive\Desktop\CodeMvcNet\ProjectNetMVC\ProjectCiber\obj\Debug\net5.0\ProjectCiber.csproj.AssemblyReference.cache
