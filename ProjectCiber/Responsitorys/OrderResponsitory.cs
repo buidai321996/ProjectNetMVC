@@ -31,7 +31,7 @@ namespace ProjectCiber.Responsitorys
             return await _orderContext.Contacts.ToListAsync();
         }
 
-        public async Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int ? page, int ? pageSize)
+        public async Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int ? page, int ? pageSize, string stringSort)
         {
             var resultDinamic = _orderContext.Orders
                 .Join(
@@ -46,7 +46,7 @@ namespace ProjectCiber.Responsitorys
                  (cs, contact) => new { Product = cs.Product, Contact = contact, Order = cs.Order }
                 ).Join(
                  _orderContext.Catagorys,
-                 product => product.Product.Id,
+                 product => product.Product.CatagoryId,
                  catagory => catagory.Id,
                   (product, catagory) => new
                   {
@@ -65,18 +65,31 @@ namespace ProjectCiber.Responsitorys
                         CatagoryName = c.CatagoryName,
                         CustomerName = c.CustomerName
                     });
+            if (stringSort.Equals("DESC"))
+            {
+                resultDinamic = resultDinamic.OrderByDescending(x => x.ProductName);
+            }
+            else
+            {
+                resultDinamic = resultDinamic.OrderBy(x => x.ProductName);
+            }
             if (contrain != null)
             {
                 var dataAll = resultDinamic.ToList().Count;
                 var data = resultDinamic.Where(order => order.CustomerName.Equals(contrain.Trim())).ToPagedList(page ?? 1, (int)pageSize);
-                data.ToList()[0].CountList = dataAll;
+                if (data.Count != 0)
+                {
+                    data.ToList()[0].CountList = dataAll;
+                }
                 return data;
             }
             else
             {
                 var dataAll = resultDinamic.ToList().Count;
                 var data = resultDinamic.ToPagedList(page ?? 1, (int)pageSize);
-                data.ToList()[0].CountList = dataAll;
+                if(data.Count != 0) {
+                    data.ToList()[0].CountList = dataAll;
+                }
                 return  data;
             }
         }

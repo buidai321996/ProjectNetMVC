@@ -22,9 +22,9 @@ namespace ProjectCiber.Services
             return _orderResponsitory.GetCustomerAsync();
         }
 
-        public Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int? page, int? pageSize)
+        public Task<IEnumerable<OrderViewModel>> GetOrderAsync(string contrain, int? page, int? pageSize, string stringSort)
         {
-            return _orderResponsitory.GetOrderAsync(contrain, page, pageSize);
+            return _orderResponsitory.GetOrderAsync(contrain, page, pageSize, stringSort);
         }
 
         public Task<List<Product>> GetProductAsync()

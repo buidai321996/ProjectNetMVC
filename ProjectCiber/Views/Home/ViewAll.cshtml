@@ -1,8 +1,14 @@
 ﻿
 @model IEnumerable<ProjectCiber.Models.ViewModels.OrderViewModel>
 @{
+    var CountList = 0;
     ViewData["Title"] = "Home Page";
-    var CountList = Model.ToList()[0].CountList;
+    if (Model.ToList().Count > 0)
+    {
+        CountList = Model.ToList()[0].CountList;
+    }
+
+
     var pageSize = ViewData["pageSize"];
     var CountPage = 0;
     if (CountList % 5 == 0)
@@ -44,7 +50,24 @@
 <div class="table-responsive-sm table1" style="overflow: auto; display: block; white-space: nowrap;">
     <table class="table" id="tableOrder">
         <thead>
-        <th data-sortable="true">Product Name</th>
+        <th data-sortable="true">
+            Product Name
+
+            <form asp-action="Index" asp-controller="Home" method="get" class="d-inline" id="formSortNameDesc">
+                <a  id="listSortDesc">
+                    <i class="fas fa-sort-up  " style="position: relative;"></i>
+                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+                    <input type="hidden" name="stringSort" value="DESC" />
+                </a>
+            </form>
+            <form asp-action="Index" asp-controller="Home" method="get" class="d-inline" id="formSortNameAsc">
+                <a  id="listSortAsc">
+                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+                    <input type="hidden" id="stringSortAsc" name="stringSort" />
+                    <i class="fas fa-sort-down mt-1 " style="position: absolute; left: 140px"></i>
+                </a>
+            </form>
+        </th>
         <th>Catagory Name</th>
         <th>Customer Name</th>
         <th>Order Date</th>
@@ -57,7 +80,8 @@
                 <tr>
                     <td>
                         @item.ProductName
-                        
+                       
+
                     </td>
                     <td>
                         @item.CustomerName
@@ -72,9 +96,10 @@
                         @item.Amount
                     <td>
                         <div>
-                            <a onclick="showInPopup1('@Url.Action("AddOrEdit","Home",new {id=item.Id},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                            <a onclick="showInPopup1('@Url.Action("AddOrEdit","Home",new {id=item.Id, page = @ViewData["pageSize"]},Context.Request.Scheme)','Update Order')" class="btn btn-sm btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
                             <form asp-action="Delete" asp-controller="Home" method="post" onsubmit="return DeleteOrder(this);" class="d-inline">
                                 <input type="hidden" name="id" value="@item.Id" />
+                                <input type="hidden" name="" value="@ViewData["pageSize"]" />
                                 <input type="submit" value="Delete" class="btn-sm btn btn-danger" />
                             </form>
                         </div>
@@ -94,19 +119,21 @@
         {
             if (Model.ToList()[0].Page.Equals(i))
             {
-                <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
-                    <input type="hidden" name="page" value="@i" />
-                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
-                    <button type="submit" class="btn-sm active ">@i</button>
-                </form>
+    <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
+        <input type="hidden" name="page" value="@i" />
+        <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+        <input type="hidden" name="stringSort" value="@ViewData["stringSort"]" />
+        <button type="submit" class="btn-sm active ">@i</button>
+    </form>
             }
             else
             {
-                <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
-                    <input type="hidden" name="page" value="@i" />
-                    <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
-                    <button type="submit" class="btn-sm ">@i</button>
-                </form>
+    <form asp-action="Index" asp-controller="Home" method="get" class="d-inline">
+        <input type="hidden" name="page" value="@i" />
+        <input type="hidden" name="pageSize" value="@ViewData["pageSize"]" />
+        <input type="hidden" name="stringSort" value="@ViewData["stringSort"]" />
+        <button type="submit" class="btn-sm ">@i</button>
+    </form>
             }
 
 
